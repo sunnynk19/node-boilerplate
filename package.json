@@ -1,0 +1,24 @@
+{
+  "name": "opentasks-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "config": "^3.0.1",
+    "express": "^4.16.4",
+    "helmet": "^3.15.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.0",
+    "lodash": "^4.17.11",
+    "logger": "0.0.1",
+    "mongoose": "^5.4.13",
+    "morgan": "^1.9.1"
+  }
+}
