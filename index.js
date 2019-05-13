@@ -1,20 +1,40 @@
+require('express-async-errors');
+const error = require("./middleware/error");
+
 const Joi = require("joi");
-const config = require("config");
+// const config = require("config");
 const morgan = require("morgan");
 const helmet = require("helmet");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const users = require("./routes/users");
 const auth = require("./routes/authentication");
 const courses = require("./routes/courses");
 
+const bodyParser = require('body-parser');
+
 const express = require('express');
 const app = express();
 
-if(!config.get("jwtPrivateKey")){
-	console.error("FATAL ERROR: jwtPrivateKey is not defined");
-	process.exit(1);  
+const cors = require('cors')
+var whitelist = ['http://localhost:3006', 'http://bugzilla.intellicar.in:3000', 'https://bugzilla.intellicar.in:3000', 'http://bugzilla.intellicar.in:10328', 'https://bugzilla.intellicar.in:10328']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
+
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded(
+  { 
+    limit: '50mb', extended: true 
+  }));
+
+app.use(cors());
 
 app.use(express.json()); //req.body
 app.use(express.urlencoded({extended: true}));
